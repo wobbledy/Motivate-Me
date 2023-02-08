@@ -16,14 +16,17 @@ body {
 
 }
 
-.button {
+.submit-btn {
     border: none;
-    background: aqua;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: black;
     display: block;
     text-align: center;
-    
+    padding: 4px;
+    margin: 4px;
+    border-style: double;
+    color: black;
+  text-shadow: 2px 2px 2px white;
 
 
 
