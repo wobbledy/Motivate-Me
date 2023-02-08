@@ -1,0 +1,30 @@
+html,
+body,
+.wrap {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: cursive;
+    /* background color */
+    text-align: center;
+    color: black;
+    padding: 20px;
+    font-size: x-large;
+
+}
+
+.button {
+    border: none;
+    background: aqua;
+    border-radius: 25px;
+    box-shadow: black;
+    display: block;
+    text-align: center;
+    
+
+
+
+}
