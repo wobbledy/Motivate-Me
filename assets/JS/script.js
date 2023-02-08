@@ -28,13 +28,32 @@ function displayQuote(data) {
     storeQuote(author, quote);
 }
 
-//Stores quotes displayed in local storage as Strings
+//Stores quotes displayed in local storage as an array
 function storeQuote(author, quote) {
-    localStorage.setItem("authorCache", JSON.stringify(author));
-    localStorage.setItem("quoteCache", JSON.stringify(quote));
+
+    var storedAuthorString = localStorage.getItem("authorCache");
+    var storedQuoteString = localStorage.getItem("quoteCache");
+    var storedAuthorArray = JSON.parse(storedAuthorString) || [];
+    var storedQuoteArray = JSON.parse(storedQuoteString) || [];
+    storedAuthorArray.push(author);
+    storedQuoteArray.push(quote);
+
+    localStorage.setItem("authorCache", JSON.stringify(storedAuthorArray));
+    localStorage.setItem("quoteCache", JSON.stringify(storedQuoteArray));
 }
 
-//Checks if there are any quotes saved in local storage and adds them to the screen
+//Checks if there are any quotes saved in local storage
 function reloadQuote() {
+    if (authorCache === null || quoteCache === null) {
+        return;
+    }
+
+    var storedAuthorString = localStorage.getItem("authorCache");
+    var storedQuoteString = localStorage.getItem("quoteCache");
+    var storedAuthorArray = JSON.parse(storedAuthorString);
+    var storedQuoteArray = JSON.parse(storedQuoteString);
     
+
+    console.log(storedAuthorArray[0]);
+    console.log(storedQuoteArray[0]);
 }
