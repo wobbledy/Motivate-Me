@@ -1,6 +1,7 @@
 var requestURL = "https://api.goprogram.ai/inspiration";
 var quoteCache;
 var authorCache;
+var quoteDisplayed = false;
 
 //Calls the API to get a random quote when the Motive Me button is pressed
 function generateQuote() {
@@ -21,11 +22,20 @@ function displayQuote(data) {
     var author = data.author;
     var quote = data.quote;
 
-    //var quoteLi = document.createElement("li");
-    //quoteLi = "test";
-    //document.getElementById("result").appendChild(quoteLi);
+    if (quoteDisplayed === false) {
 
-    storeQuote(author, quote);
+        quoteDisplayed = true;
+        var quoteLi = document.createElement("li");
+        quoteLi = "\"" + quote + "\"";
+        document.getElementById("result").append(quoteLi);
+
+        var authorLi = document.createElement("li");
+        authorLi = author;
+        document.getElementById("author").append(authorLi);
+
+        storeQuote(author, quote);
+    }
+    
 }
 
 //Stores quotes displayed in local storage as an array
@@ -52,7 +62,7 @@ function reloadQuote() {
     var storedQuoteString = localStorage.getItem("quoteCache");
     var storedAuthorArray = JSON.parse(storedAuthorString);
     var storedQuoteArray = JSON.parse(storedQuoteString);
-    
+
 
     console.log(storedAuthorArray[0]);
     console.log(storedQuoteArray[0]);
