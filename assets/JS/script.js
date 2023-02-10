@@ -2,6 +2,9 @@ var requestQuote = "https://api.goprogram.ai/inspiration";
 var requestSong = "https://api.napster.com/v2.2/search?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&query=inspirational"
 var quoteCache;
 var authorCache;
+var trackCache;
+var artistCache;
+var previewURLCache;
 var quoteDisplayed = false;
 
 //Calls the API to get a random quote when the Motive Me button is pressed
@@ -15,9 +18,11 @@ function generateQuote() {
         .then(function (data) {
             displayQuote(data);
         })
+    
+   getSong();
 }
 
-//Calls the API to get a random inspirational song
+//Calls the API to get a list of inspirational songs
 function getSong() {
 
     fetch(requestSong)
@@ -26,12 +31,11 @@ function getSong() {
         })
         .then(function (data) {
             generateSong(data);
-            console.log(data);
+            //console.log(data);
         })
 }
 
-getSong();
-
+//Grabs a random song from the API call function
 function generateSong(data) {
     var trackNumber = Math.floor(Math.random() * 19);
     var trackName = data.search.data.tracks[trackNumber].name;
@@ -41,6 +45,34 @@ function generateSong(data) {
     console.log(trackName);
     console.log(artist);
     console.log(previewURL)
+
+    displaySong(trackName, artist, previewURL);
+
+}
+
+//Displays the song info on the screen
+function displaySong(trackName, artist, previewURL) {
+    //Code to Display Song on Screen
+
+    storeSong(trackName, artist, previewURL);
+}
+
+//Stores the song information into an array
+function storeSong(trackName, artist, previewURL) {
+    
+    var storedTrackNameString = localStorage.getItem("trackCache");
+    var storedArtistString = localStorage.getItem("artistCache");
+    var storedPreviewURLString = localStorage.getItem("previewURLCache");
+    var storedTrackNameArray = JSON.parse(storedTrackNameString) || [];
+    var storedArtistArray = JSON.parse(storedArtistString) || [];
+    var storedPreviewURLArray = JSON.parse(storedPreviewURLString) || [];
+    storedTrackNameArray.push(trackName);
+    storedArtistArray.push(artist);
+    storedPreviewURLArray.push(previewURL);
+
+    localStorage.setItem("trackCache", JSON.stringify(storedTrackNameArray));
+    localStorage.setItem("artistCache", JSON.stringify(storedArtistArray));
+    localStorage.setItem("previewURLCache", JSON.stringify(storedPreviewURLArray));
 }
 
 //Displays the quote on the screen
