@@ -6,6 +6,7 @@ var trackCache = [];
 var artistCache = [];
 var previewURLCache = [];
 var quoteDisplayed = false;
+var songDisplayed = false;
 
 //Calls the API to get a random quote when the Motive Me button is pressed
 function generateQuote() {
@@ -18,8 +19,8 @@ function generateQuote() {
         .then(function (data) {
             displayQuote(data);
         })
-    
-   getSong();
+
+    getSong();
 }
 
 //Calls the API to get a list of inspirational songs
@@ -31,7 +32,6 @@ function getSong() {
         })
         .then(function (data) {
             generateSong(data);
-            //console.log(data);
         })
 }
 
@@ -42,24 +42,41 @@ function generateSong(data) {
     var artist = data.search.data.tracks[trackNumber].artistName;
     var previewURL = data.search.data.tracks[trackNumber].previewURL;
 
-    console.log(trackName);
-    console.log(artist);
-    console.log(previewURL)
-
     displaySong(trackName, artist, previewURL);
 
 }
 
 //Displays the song info on the screen
 function displaySong(trackName, artist, previewURL) {
-    //Code to Display Song on Screen
 
-    storeSong(trackName, artist, previewURL);
+    if (songDisplayed === false) {
+        songDisplayed = true;
+        
+        //var previewURLLink = document.createElement("a");
+        //previewURLLink.title = "Link to URL"
+        //previewURLLink.href = previewURL;
+        //document.getElementById("URL").append(previewURLLink);
+
+        var trackLi = document.createElement("li");
+        trackLi = "Song Name: " + trackName;
+        document.getElementById("song").append(trackLi);
+
+        var artistLi = document.createElement("li");
+        artistLi = "Artist: " + artist;
+        document.getElementById("artist").append(artistLi);
+
+        var previewLi = document.createElement("li");
+        previewLi = "Song Preview URL: " + previewURL;
+        document.getElementById("URL").append(previewLi);
+
+        storeSong(trackName, artist, previewURL);
+
+    }
 }
 
 //Stores the song information into an array
 function storeSong(trackName, artist, previewURL) {
-    
+
     var storedTrackNameArray = JSON.parse(localStorage.getItem("trackCache")) || [];
     var storedArtistArray = JSON.parse(localStorage.getItem("artistCache")) || [];
     var storedPreviewURLArray = JSON.parse(localStorage.getItem("previewURLCache")) || [];
@@ -90,7 +107,7 @@ function displayQuote(data) {
 
         storeQuote(author, quote);
     }
-    
+
 }
 
 //Stores quotes displayed in local storage as an array
