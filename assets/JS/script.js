@@ -1,10 +1,10 @@
 var requestQuote = "https://api.goprogram.ai/inspiration";
 var requestSong = "https://api.napster.com/v2.2/search?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&query=inspirational"
-var quoteCache;
-var authorCache;
-var trackCache;
-var artistCache;
-var previewURLCache;
+var quoteCache = [];
+var authorCache = [];
+var trackCache = [];
+var artistCache = [];
+var previewURLCache = [];
 var quoteDisplayed = false;
 
 //Calls the API to get a random quote when the Motive Me button is pressed
@@ -60,12 +60,9 @@ function displaySong(trackName, artist, previewURL) {
 //Stores the song information into an array
 function storeSong(trackName, artist, previewURL) {
     
-    var storedTrackNameString = localStorage.getItem("trackCache");
-    var storedArtistString = localStorage.getItem("artistCache");
-    var storedPreviewURLString = localStorage.getItem("previewURLCache");
-    var storedTrackNameArray = JSON.parse(storedTrackNameString) || [];
-    var storedArtistArray = JSON.parse(storedArtistString) || [];
-    var storedPreviewURLArray = JSON.parse(storedPreviewURLString) || [];
+    var storedTrackNameArray = JSON.parse(localStorage.getItem("trackCache")) || [];
+    var storedArtistArray = JSON.parse(localStorage.getItem("artistCache")) || [];
+    var storedPreviewURLArray = JSON.parse(localStorage.getItem("previewURLCache")) || [];
     storedTrackNameArray.push(trackName);
     storedArtistArray.push(artist);
     storedPreviewURLArray.push(previewURL);
@@ -99,10 +96,8 @@ function displayQuote(data) {
 //Stores quotes displayed in local storage as an array
 function storeQuote(author, quote) {
 
-    var storedAuthorString = localStorage.getItem("authorCache");
-    var storedQuoteString = localStorage.getItem("quoteCache");
-    var storedAuthorArray = JSON.parse(storedAuthorString) || [];
-    var storedQuoteArray = JSON.parse(storedQuoteString) || [];
+    var storedAuthorArray = JSON.parse(localStorage.getItem("authorCache")) || [];
+    var storedQuoteArray = JSON.parse(localStorage.getItem("quoteCache")) || [];
     storedAuthorArray.push(author);
     storedQuoteArray.push(quote);
 
