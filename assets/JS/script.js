@@ -1,4 +1,5 @@
-var requestURL = "https://api.goprogram.ai/inspiration";
+var requestQuote = "https://api.goprogram.ai/inspiration";
+var requestSong = "https://api.napster.com/v2.2/search?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&query=inspirational"
 var quoteCache;
 var authorCache;
 var quoteDisplayed = false;
@@ -7,7 +8,7 @@ var quoteDisplayed = false;
 function generateQuote() {
     event.preventDefault();
 
-    fetch(requestURL)
+    fetch(requestQuote)
         .then(function (response) {
             return response.json();
         })
@@ -16,6 +17,31 @@ function generateQuote() {
         })
 }
 
+//Calls the API to get a random inspirational song
+function getSong() {
+
+    fetch(requestSong)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            generateSong(data);
+            console.log(data);
+        })
+}
+
+getSong();
+
+function generateSong(data) {
+    var trackNumber = Math.floor(Math.random() * 19);
+    var trackName = data.search.data.tracks[trackNumber].name;
+    var artist = data.search.data.tracks[trackNumber].artistName;
+    var previewURL = data.search.data.tracks[trackNumber].previewURL;
+
+    console.log(trackName);
+    console.log(artist);
+    console.log(previewURL)
+}
 
 //Displays the quote on the screen
 function displayQuote(data) {
