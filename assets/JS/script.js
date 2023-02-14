@@ -52,10 +52,11 @@ function displaySong(trackName, artist, previewURL) {
     if (songDisplayed === false) {
         songDisplayed = true;
         
-        //var previewURLLink = document.createElement("a");
-        //previewURLLink.title = "Link to URL"
-        //previewURLLink.href = previewURL;
-        //document.getElementById("URL").append(previewURLLink);
+        var previewURLLink = document.getElementById("URL");
+        previewURLLink.href = previewURL;
+        var previewLi = document.createElement("li");
+        previewLi = "Song Preview URL: " + previewURLLink;
+        document.getElementById("URL").append(previewLi);
 
         var trackLi = document.createElement("li");
         trackLi = "Song Name: " + trackName;
@@ -67,7 +68,6 @@ function displaySong(trackName, artist, previewURL) {
 
         var previewLi = document.createElement("li");
         previewLi = "Song Preview URL: " + previewURL;
-        document.getElementById("URL").append(previewLi);
 
         storeSong(trackName, artist, previewURL);
 
