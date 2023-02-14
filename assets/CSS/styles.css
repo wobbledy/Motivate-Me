@@ -5,10 +5,9 @@ body,
     padding: 0;
     margin: 0;
 }
-
+/* Assigned Font, alignment, color and font size to the body*/
 body {
     font-family: 'Courgette', cursive;
-    /* background color */
     text-align: center;
     color: black;
     font-size: x-large;
@@ -29,13 +28,13 @@ body {
 .col-md-6 {
     width: 100%;
 }
-
+/* Gave properties to center for result */
 #result {
     display: flex;
     justify-content: center;
     margin-top: 100px;
 }
-
+/* Stylied button to have it stand out and appear on screen in proper position */
 .submit-btn {
     border: none;
     border-radius: 10px;
@@ -50,7 +49,7 @@ body {
     color: black;
   text-shadow: 2px 2px 2px white;
 }
-
+/* Centering and styling text with a border */
 .para {
     text-align: center;
     margin: 10px;
@@ -66,7 +65,7 @@ body {
     text-align: end;
 }
 
-
+/* Added background image to cover the webpage */
 .body-background-img {
     width: 100%;
     height: 500px;
@@ -76,7 +75,7 @@ body {
     background-image: url(../Images/patrick-ryan-3kUIaB2EPp8-unsplash.jpg);
 }
 
-
+/* added media screen so it displays properly on phones/tablets/laptops*/
 @media screen and (max-width: 768px) {
     main, .nav {
         flex-direction: column;
